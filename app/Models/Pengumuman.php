@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pengumuman extends Model
 {
+    protected $table = 'pengumumen';
     protected $primaryKey = 'id_pengumuman';
     protected $fillable = [
         'judul',
@@ -13,6 +14,10 @@ class Pengumuman extends Model
         'tanggal',
         'status',
         'id_user'
+    ];
+
+    protected $casts = [
+        'tanggal' => 'date',
     ];
 
     public function user(){

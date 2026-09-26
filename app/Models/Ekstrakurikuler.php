@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ekstrakurikuler extends Model
 {
+    protected $table = 'ekstrakurikulers';
     protected $primaryKey = 'id_ekskul';
     protected $fillable = [
         'nama_ekskul',
