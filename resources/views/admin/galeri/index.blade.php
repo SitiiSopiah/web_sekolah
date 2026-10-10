@@ -2,12 +2,12 @@
 
 @section('content')
 
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-4">
+<div class="header bg-gradient-green pb-8 pt-5 pt-md-4">
     <div class="container-fluid">
 
         <div class="row align-items-center py-4">
 
-            <div class="col-lg-8 col-7">
+            <div class="col-lg-5 col-7">
 
                 <h1 class="text-white">
                     Galeri Sekolah
@@ -20,15 +20,58 @@
 
             </div>
 
-            <div class="col-lg-4 col-5 text-right">
+            <div class="col-lg-7 col-5 text-right">
+                <div class="d-flex justify-content-end align-items-center">
+                    {{-- Search --}}
+                    <form action="{{ route('galeri.index') }}"
+                        method="GET"
+                        class="mr-2">
 
-                <a href="{{ route('galeri.create') }}"
-                   class="btn btn-white">
+                        <div class="input-group">
 
-                    <i class="fas fa-plus"></i>
-                    Tambah Galeri
+                            <input
+                                type="text"
+                                name="search"
+                                class="form-control"
+                                placeholder="Cari galeri..."
+                                value="{{ request('search') }}"
+                                style="
+                                    height: 44px;
+                                    width: 230px;
+                                    border: none;
+                                    border-radius: 6px 0 0 6px;
+                                "
+                            >
 
-                </a>
+                            <div class="input-group-append">
+
+                                <button type="submit"
+                                        class="btn btn-white"
+                                        style="
+                                            height: 44px;
+                                            border-radius: 0 6px 6px 0;
+                                            margin: 0;
+                                        ">
+
+                                    <i class="fas fa-search"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                    <a href="{{ route('galeri.create') }}"
+                    class="btn btn-md btn-white">
+
+                        <i class="fas fa-plus"></i>
+                        Tambah Galeri
+
+                    </a>
+                    
+                </div>
 
             </div>
 
@@ -254,7 +297,7 @@
                             {{-- Aksi --}}
                             <td>
 
-                                <a href="{{ route('galeri.edit', $galeri->id_galeri) }}"
+                                <a href="{{ route('galeri.edit', Crypt::encrypt($galeri->id_galeri)) }}"
                                    class="btn btn-sm btn-warning"
                                    title="Edit">
 
@@ -264,7 +307,7 @@
 
 
                                 <form
-                                    action="{{ route('galeri.destroy', $galeri->id_galeri) }}"
+                                    action="{{ route('galeri.destroy', Crypt::encrypt($galeri->id_galeri)) }}"
                                     method="POST"
                                     class="d-inline"
                                     onsubmit="return confirm('Yakin ingin menghapus galeri ini?')"

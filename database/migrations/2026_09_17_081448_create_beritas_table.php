@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('beritas', function (Blueprint $table) {
             $table->id('id_berita');
             $table->string('judul');
+            $table->text('slug')->unique();
             $table->text('isi');
             $table->date('tanggal');
             $table->enum('status', ['Publish','Draft'])->default('Draft');

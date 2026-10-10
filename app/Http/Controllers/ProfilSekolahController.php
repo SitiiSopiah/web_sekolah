@@ -24,6 +24,13 @@ class ProfilSekolahController extends Controller
         return view('admin.profil_sekolah.index', compact('profil'));
     }
 
+    public function public()
+    {
+        $profil = \App\Models\ProfilSekolah::first();
+
+        return view('public.profil_sekolah', compact('profil'));
+    }
+
     public function create()
     {
         return view('admin.profil_sekolah.create');

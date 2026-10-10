@@ -26,15 +26,15 @@ class DashboardController extends Controller
         $jumlahGaleri = Galeri::count();
 
 
-        $beritaTerbaru = Berita::latest()
+        $beritaTerbaru = Berita::where('status', 'Publish')
             ->take(5)
             ->get();
 
 
-        $pengumumanTerbaru = Pengumuman::latest()
-            ->take(5)
+        $pengumumanTerbaru = Pengumuman::where('status', 'Publish')
+            ->orderBy('tanggal', 'desc')
+            ->take(3)
             ->get();
-
 
         return view('admin.dashboard.index', compact(
             'jumlahGuru',

@@ -42,7 +42,7 @@
             max-width: 430px;
             border: 0;
             border-radius: 12px;
-            box-shadow: 0 0 2rem rgba(136, 152, 170, .15);
+            box-shadow: 0 0 2rem rgba(0, 107, 60, .15);
             overflow: hidden;
         }
 
@@ -54,14 +54,14 @@
         .school-title {
             font-size: 24px;
             font-weight: 700;
-            color: #5e72e4;
+            color: #006b3c;
             margin-bottom: 2px;
         }
 
         .school-subtitle {
             font-size: 14px;
             font-weight: 600;
-            color: #8898aa;
+            color: #74d1a4;
             letter-spacing: .5px;
         }
 
@@ -69,14 +69,14 @@
             width: 70px;
             height: 70px;
             border-radius: 50%;
-            background: #5e72e4;
+            background: #006b3c;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             font-size: 28px;
-            box-shadow: 0 8px 20px rgba(94, 114, 228, .25);
+            box-shadow: 0 8px 20px rgba(0, 107, 60, .25);
         }
 
         .login-body {
@@ -101,9 +101,14 @@
 
         .login-footer {
             text-align: center;
-            color: #8898aa;
+            color: #74d1a4;
             font-size: 13px;
             padding-bottom: 25px;
+        }
+
+        .btn-green {
+            background-color: #006b3c;
+            border-color: #006b3c;
         }
 
     </style>
@@ -303,7 +308,7 @@
 
                 {{-- BUTTON --}}
                 <button type="submit"
-                        class="btn btn-primary btn-block login-button">
+                        class="btn btn-green btn-block login-button text-white">
 
                     <i class="fas fa-sign-in-alt mr-2"></i>
 

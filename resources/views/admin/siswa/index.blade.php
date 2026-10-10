@@ -3,30 +3,82 @@
 @section('title', 'Data Siswa')
 
 @section('content')
+<div class="header bg-gradient-green pb-8 pt-5 pt-md-4">
+    <div class="container-fluid mt-4">
 
-<div class="container-fluid py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="col-lg-5 col-7">
+                <h1 class="text-white">Data Siswa</h1>
+                <p class="text-white">
+                    Kelola data siswa SMPN 2 MANGUNREJA
+                </p>
+            </div>
+            
+            <div class="col-lg-7 col-7">
+                <div class="d-flex justify-content-end align-items-center">
 
-        <div>
-            <h1 class="h2">Data Siswa</h1>
-            <p class="text-muted">
-                Kelola data siswa SMPN 2 MANGUNREJA
-            </p>
+                    {{-- Search --}}
+                    <form action="{{ route('siswa.index') }}"
+                        method="GET"
+                        class="mr-2">
+
+                        <div class="input-group">
+
+                            <input
+                                type="text"
+                                name="search"
+                                class="form-control"
+                                placeholder="Cari siswa..."
+                                value="{{ request('search') }}"
+                                style="
+                                    height: 44px;
+                                    width: 230px;
+                                    border: none;
+                                    border-radius: 6px 0 0 6px;
+                                "
+                            >
+
+                            <div class="input-group-append">
+
+                                <button type="submit"
+                                        class="btn btn-white"
+                                        style="
+                                            height: 44px;
+                                            border-radius: 0 6px 6px 0;
+                                            margin: 0;
+                                        ">
+
+                                    <i class="fas fa-search"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                    @if(auth()->user()->role === 'Admin')
+
+                        <a href="{{ route('siswa.create') }}"
+                        class="btn btn-white">
+
+                            <i class="fas fa-plus"></i>
+                            Tambah Siswa
+
+                        </a>
+
+                    @endif
+
+                </div>
+            </div>
+            
         </div>
-
-        @if(auth()->user()->role === 'Admin')
-            <a href="{{ route('siswa.create') }}"
-            class="btn btn-primary">
-
-                <i class="fas fa-plus"></i>
-                Tambah Siswa
-
-            </a>
-        @endif
-        
     </div>
+</div>
 
+<div class="container-fluid mt--7">
     @if(session('success'))
 
         <div class="alert alert-success">
@@ -77,14 +129,14 @@
                                 @if(auth()->user()->role === 'Admin')  
                                     <td>
                                         {{-- Tombol Edit --}}
-                                        <a href="{{ route('siswa.edit', $item->id_siswa) }}"
+                                        <a href="{{ route('siswa.edit', Crypt::encrypt($item->id_siswa)) }}"
                                         class="btn btn-sm btn-warning"
                                         title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
 
                                         {{-- Tombol Hapus --}}
-                                        <form action="{{ route('siswa.destroy', $item->id_siswa) }}"
+                                        <form action="{{ route('siswa.destroy', Crypt::encrypt($item->id_siswa)) }}"
                                             method="POST"
                                             style="display: inline;"
                                             onsubmit="return confirm('Yakin ingin menghapus data siswa ini?');">
@@ -115,7 +167,6 @@
 
         </div>
     </div>
-
 </div>
 
 @endsection

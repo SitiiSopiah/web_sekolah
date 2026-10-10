@@ -6,15 +6,30 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
     /**
      * Menampilkan semua user
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('created_at', 'desc')->get();
+        $query = User::query();
+
+        if ($request->filled('search')) {
+
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+
+                $q->where('username', 'like', "%{$search}%")
+                ->orWhere('role', 'like', "%{$search}%");
+
+            });
+        }
+
+        $users = $query->orderBy('username', 'asc')->get();
 
         return view('users.index', compact('users'));
     }
@@ -60,9 +75,18 @@ class UserController extends Controller
     /**
      * Form edit user
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        return view('users.edit', compact('user'));
+        try {
+            $id = Crypt::decrypt($id);
+
+            $user = User::findOrFail($id);
+
+            return view('users.edit', compact('user'));
+
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+            abort(404);
+        }
     }
 
     /**

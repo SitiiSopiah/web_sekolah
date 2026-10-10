@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="header bg-primary pb-6 pt-md-4">
+<div class="header bg-gradient-green pb-6 pt-md-4">
     <div class="container-fluid">
         <div class="header-body">
 
@@ -14,16 +14,64 @@
                     </h6>
                 </div>
 
-                @if(auth()->user()->role === 'Admin')
-                    <div class="col-lg-6 col-5 text-right">
-                        <a href="{{ route('users.create') }}"
-                        class="btn btn-md btn-white">
-                            <i class="fas fa-plus"></i>
-                            Tambah User
-                        </a>
-                
+                <div class="col-lg-6 col-5 text-right">
+
+                    <div class="d-flex justify-content-end align-items-center">
+
+                        {{-- Search --}}
+                        <form action="{{ route('users.index') }}"
+                            method="GET"
+                            class="mr--6">
+
+                            <div class="input-group">
+
+                                <input
+                                    type="text"
+                                    name="search"
+                                    class="form-control"
+                                    placeholder="Cari user..."
+                                    value="{{ request('search') }}"
+                                    style="
+                                        height: 44px;
+                                        width: 230px;
+                                        border: none;
+                                        border-radius: 6px 0 0 6px;
+                                    "
+                                >
+
+                                <div class="input-group-append">
+
+                                    <button type="submit"
+                                            class="btn btn-white"
+                                            style="
+                                                height: 44px;
+                                                border-radius: 0 6px 6px 0;
+                                                margin: 0;
+                                            ">
+
+                                        <i class="fas fa-search"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                        @if(auth()->user()->role === 'Admin')
+                            <div class="col-lg-6 col-5 text-right">
+                                <a href="{{ route('users.create') }}"
+                                class="btn btn-md btn-white">
+                                    <i class="fas fa-plus"></i>
+                                    Tambah User
+                                </a>
+                        
+                            </div>
+                        @endif
+                        
                     </div>
-                @endif
+                </div>
 
             </div>
 
@@ -129,7 +177,7 @@
                                 <td class="text-center">
 
                                     {{-- Edit --}}
-                                    <a href="{{ route('users.edit', $user->id_user) }}"
+                                    <a href="{{ route('users.edit', Crypt::encrypt($user->id_user)) }}"
                                     class="btn btn-sm btn-warning"
                                     title="Edit">
                                         <i class="fas fa-edit"></i>
@@ -138,7 +186,7 @@
                                     {{-- Hapus --}}
                                     @if(auth()->id() != $user->id_user)
 
-                                        <form action="{{ route('users.destroy', $user->id_user) }}"
+                                        <form action="{{ route('users.destroy', Crypt::encrypt($user->id_user)) }}"
                                             method="POST"
                                             style="display:inline;"
                                             onsubmit="return confirm('Yakin ingin menghapus user ini?');">

@@ -2,12 +2,12 @@
 
 @section('content')
 
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-4">
+<div class="header bg-gradient-green pb-8 pt-5 pt-md-4">
     <div class="container-fluid">
 
         <div class="row align-items-center py-4">
 
-            <div class="col-lg-8 col-7">
+            <div class="col-lg-4 col-7">
 
                 <h1 class="text-white">
                     Ekstrakurikuler
@@ -19,15 +19,59 @@
 
             </div>
 
-            <div class="col-lg-4 col-5 text-right">
+            <div class="col-lg-8 col-5 text-right">
 
-                <a href="{{ route('ekstrakurikuler.create') }}"
-                   class="btn btn-white">
+                <div class="d-flex justify-content-end align-items-center">
+                    {{-- Search --}}
+                    <form action="{{ route('ekstrakurikuler.index') }}"
+                        method="GET"
+                        class="mr-2">
 
-                    <i class="fas fa-plus"></i>
-                    Tambah Ekstrakurikuler
+                        <div class="input-group">
 
-                </a>
+                            <input
+                                type="text"
+                                name="search"
+                                class="form-control"
+                                placeholder="Cari ekstrakurikuler..."
+                                value="{{ request('search') }}"
+                                style="
+                                    height: 44px;
+                                    width: 230px;
+                                    border: none;
+                                    border-radius: 6px 0 0 6px;
+                                "
+                            >
+
+                            <div class="input-group-append">
+
+                                <button type="submit"
+                                        class="btn btn-white"
+                                        style="
+                                            height: 44px;
+                                            border-radius: 0 6px 6px 0;
+                                            margin: 0;
+                                        ">
+
+                                    <i class="fas fa-search"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                    <a href="{{ route('ekstrakurikuler.create') }}"
+                    class="btn btn-md btn-white">
+
+                        <i class="fas fa-plus"></i>
+                        Tambah Ekstrakurikuler
+
+                    </a>
+                    
+                </div>
 
             </div>
 
@@ -207,7 +251,7 @@
                             {{-- Aksi --}}
                             <td>
 
-                                <a href="{{ route('ekstrakurikuler.edit', $item->id_ekskul) }}"
+                                <a href="{{ route('ekstrakurikuler.edit', Crypt::encrypt($item->id_ekskul)) }}"
                                    class="btn btn-sm btn-warning">
 
                                     <i class="fas fa-edit"></i>
@@ -216,7 +260,7 @@
 
 
                                 <form
-                                    action="{{ route('ekstrakurikuler.destroy', $item->id_ekskul) }}"
+                                    action="{{ route('ekstrakurikuler.destroy', Crypt::encrypt($item->id_ekskul)) }}"
                                     method="POST"
                                     class="d-inline"
                                     onsubmit="return confirm('Yakin ingin menghapus data ini?');"

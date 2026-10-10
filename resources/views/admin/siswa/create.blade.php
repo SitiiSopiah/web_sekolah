@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-4">
+<div class="header bg-gradient-green pb-8 pt-5 pt-md-4">
     <div class="container-fluid">
         <div class="header-body">
             <h1 class="text-white">Tambah Siswa</h1>
@@ -81,10 +81,11 @@
 
                 <a href="{{ route('siswa.index') }}"
                    class="btn btn-secondary">
+                   <i class="fas fa-arrow-left"></i>
                     Kembali
                 </a>
 
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-green">
                     <i class="fas fa-save"></i>
                     Simpan
                 </button>

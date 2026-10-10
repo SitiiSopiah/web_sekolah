@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-4">
+<div class="header bg-gradient-green pb-8 pt-5 pt-md-4">
 
     <div class="container-fluid">
 
@@ -10,7 +10,7 @@
 
             <div class="row align-items-center py-4">
 
-                <div class="col-lg-6 col-7">
+                <div class="col-lg-5 col-7">
 
                     <h1 class="text-white">
                         Berita
@@ -22,15 +22,60 @@
 
                 </div>
 
-                <div class="col-lg-6 col-5 text-right">
+                <div class="col-lg-7 col-5 text-right">
 
-                    <a href="{{ route('berita.create') }}"
-                       class="btn btn-md btn-white">
+                    <div class="d-flex justify-content-end align-items-center">
 
-                        <i class="fas fa-plus"></i>
-                        Tambah Berita
+                        {{-- Search --}}
+                        <form action="{{ route('berita.index') }}"
+                            method="GET"
+                            class="mr-2">
 
-                    </a>
+                            <div class="input-group">
+
+                                <input
+                                    type="text"
+                                    name="search"
+                                    class="form-control"
+                                    placeholder="Cari berita..."
+                                    value="{{ request('search') }}"
+                                    style="
+                                        height: 44px;
+                                        width: 230px;
+                                        border: none;
+                                        border-radius: 6px 0 0 6px;
+                                    "
+                                >
+
+                                <div class="input-group-append">
+
+                                    <button type="submit"
+                                            class="btn btn-white"
+                                            style="
+                                                height: 44px;
+                                                border-radius: 0 6px 6px 0;
+                                                margin: 0;
+                                            ">
+
+                                        <i class="fas fa-search"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </form>
+
+                        <a href="{{ route('berita.create') }}"
+                        class="btn btn-md btn-white">
+
+                            <i class="fas fa-plus"></i>
+                            Tambah Berita
+
+                        </a>
+                        
+                    </div>
 
                 </div>
 
@@ -88,6 +133,7 @@
                         <th>Tanggal</th>
                         <th>Isi</th>
                         <th>Status</th>
+                        <th>Diinput Oleh</th>
                         <th>Aksi</th>
                     </tr>
 
@@ -202,13 +248,30 @@
 
                             </td>
 
+                            <td class="text-center">
+                                @if ($item->user)
+                                    <strong>{{ $item->user->username }}</strong>
+                                    <br>
+                                    @if ($item->user->role === 'Admin')
+                                        <span class="badge badge-success">Admin</span>
+                                    @elseif ($item->user->role === 'Operator')
+                                        <span class="badge badge-info">Operator</span>
+                                    @else
+                                        <span class="badge badge-secondary">
+                                            {{ $item->user->role }}
+                                        </span>
+                                    @endif
+                                @else
+                                    <span class="text-muted">Tidak diketahui</span>
+                                @endif
+                            </td>
 
                             {{-- AKSI --}}
                             <td>
 
 
                                 <a
-                                    href="{{ route('berita.edit', $item->id_berita) }}"
+                                    href="{{ route('berita.edit', Crypt::encrypt($item->id_berita)) }}"
                                     class="btn btn-sm btn-warning"
                                     title="Edit"
                                 >
@@ -217,7 +280,7 @@
 
 
                                 <form
-                                    action="{{ route('berita.destroy', $item->id_berita) }}"
+                                    action="{{ route('berita.destroy', Crypt::encrypt($item->id_berita)) }}"
                                     method="POST"
                                     style="display:inline-block;"
                                 >
@@ -268,7 +331,6 @@
 </div>
 
 @endsection
-
 
 @push('js')
 

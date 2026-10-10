@@ -1,0 +1,1077 @@
+:root {
+    --green-dark: #006b3c;
+    --green: #079447;
+    --green-light: #16a05d;
+    --green-soft: #e8f5ee;
+    --green-bg: #f5f8f6;
+    --gold: #f4bd36;
+    --gold-dark: #d99a16;
+    --text-dark: #173d2d;
+}
+
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: var(--text-dark);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    transition: all .25s ease;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    min-height: 80px;
+    z-index: 9999;
+    background: #ffffff !important;
+}
+
+.navbar-brand {
+    color: var(--text-dark) !important;
+}
+
+.navbar-brand img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.navbar .nav-link {
+    color: var(--green-dark) !important;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+.navbar .nav-link:hover {
+    color: var(--green-light) !important;
+}
+
+.navbar-toggler {
+    border-color: var(--green-dark);
+}
+
+.navbar-toggler:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='%23006b3c' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.dropdown-menu {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+}
+
+.dropdown-item {
+    color: var(--text-dark);
+    padding: 10px 18px;
+}
+
+.dropdown-item:hover {
+    background: var(--green-soft);
+    color: var(--green-dark);
+}
+
+.navbar .navbar-nav .nav-link.active {
+    color: #f4bd36 !important;
+    font-weight: 700;
+}
+
+.navbar .navbar-nav .nav-link.active::after {
+    content: "";
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 4px auto 0;
+    background: #f4bd36;
+    border-radius: 10px;
+}
+
+.navbar .navbar-nav .nav-link:hover {
+    color: #f4bd36 !important;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+#beranda {
+    position: relative;
+    min-height: 100vh;
+    padding-top: 80px;
+    overflow: hidden;
+}
+
+#beranda .container {
+    position: relative;
+    z-index: 2;
+}
+
+#beranda h1 {
+    font-weight: 300;
+    color: #ffffff;
+    letter-spacing: .5px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+}
+
+#beranda h2 {
+    color: var(--gold) !important;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, .25);
+}
+
+
+/* Badge hero */
+
+#beranda .badge {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .5px;
+    border-radius: 30px;
+}
+
+
+/* =========================================================
+   BUTTON HERO
+========================================================= */
+
+.btn-school-primary {
+    background: var(--gold);
+    border: 2px solid var(--gold);
+    color: var(--text-dark) !important;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 11px 24px;
+    border-radius: 30px;
+    min-width: 165px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-school-primary:hover {
+    background: #ffd45f;
+    border-color: #ffd45f;
+    color: var(--text-dark) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(244, 189, 54, .25);
+}
+
+.btn-school-secondary {
+    background: rgba(0, 107, 60, .65);
+    border: 2px solid #4bc486;
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 11px 24px;
+    border-radius: 30px;
+    min-width: 145px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-school-secondary:hover {
+    background: var(--green-light);
+    border-color: var(--green-light);
+    color: #ffffff !important;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   STATISTIK
+========================================================= */
+
+.school-stat {
+    background: linear-gradient(
+        135deg,
+        #004d2b,
+        #006b3c
+    );
+    border-radius: 0 0 5px 5px;
+}
+
+.school-stat .stat-item {
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(255, 255, 255, .15);
+}
+
+.school-stat > div:last-child .stat-item {
+    border-right: none;
+}
+
+.school-stat h2 {
+    color: #ffffff;
+    font-size: 32px;
+    margin: 0;
+}
+
+.school-stat small {
+    color: rgba(255, 255, 255, .75);
+    font-size: 13px;
+    letter-spacing: .5px;
+}
+
+
+/* =========================================================
+   SECTION UMUM
+========================================================= */
+
+.section-label {
+    display: inline-block;
+    color: var(--gold-dark);
+    letter-spacing: 2px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.section-title {
+    color: var(--text-dark);
+    font-size: 32px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   SAMBUTAN KEPALA SEKOLAH
+========================================================= */
+
+#profil {
+    background: #ffffff;
+}
+
+#profil img {
+    transition: all .3s ease;
+}
+
+#profil img:hover {
+    transform: translateY(-3px);
+}
+
+#profil p {
+    color: #555555;
+}
+
+#profil hr {
+    border-top: 1px solid #e5e5e5;
+}
+
+#profil h4 {
+    color: var(--green-dark);
+}
+/* ==============================
+   VISI & MISI SEKOLAH
+============================== */
+
+.visi-misi-section {
+    background: #f5f9f7;
+    padding: 70px 0;
+}
+
+.visi-label {
+    display: inline-block;
+    color: #078447;
+    background: #e5f5eb;
+    padding: 7px 16px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+}
+
+.visi-section-title {
+    color: #075b36;
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.visi-section-subtitle {
+    color: #6b7d73;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* Card utama */
+.visi-misi-card {
+    max-width: 1050px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #e7efe9;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0, 75, 40, 0.07);
+}
+
+/* Header card */
+.visi-misi-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 28px 36px;
+    background: linear-gradient(135deg, #ffffff, #f1faf4);
+    border-bottom: 1px solid #e8f0eb;
+}
+
+.visi-misi-icon {
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e0f3e7;
+    color: #078447;
+    border-radius: 17px;
+    font-size: 23px;
+}
+
+.visi-misi-header h3 {
+    color: #075b36;
+    font-size: 23px;
+    font-weight: 750;
+    margin: 0 0 5px;
+}
+
+.visi-misi-header p {
+    color: #7a8b81;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* Isi card */
+.visi-misi-content {
+    padding: 32px 42px 38px;
+}
+
+.visi-misi-text {
+    color: #52645a;
+    font-size: 15px;
+    line-height: 2;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+/* Pesan jika data kosong */
+.visi-misi-empty {
+    padding: 18px;
+    border-radius: 12px;
+    background: #f5f9f7;
+    color: #718077;
+    text-align: center;
+}
+
+/* Tampilan HP */
+@media (max-width: 768px) {
+    .visi-misi-section {
+        padding: 45px 0;
+    }
+
+    .visi-section-title {
+        font-size: 27px;
+    }
+
+    .visi-section-subtitle {
+        font-size: 14px;
+        padding: 0 10px;
+    }
+
+    .visi-misi-header {
+        padding: 22px 20px;
+        gap: 13px;
+    }
+
+    .visi-misi-icon {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        border-radius: 14px;
+        font-size: 19px;
+    }
+
+    .visi-misi-header h3 {
+        font-size: 19px;
+    }
+
+    .visi-misi-content {
+        padding: 24px 22px 28px;
+    }
+
+    .visi-misi-text {
+        font-size: 14px;
+        line-height: 1.9;
+    }
+}
+
+
+/* =========================================================
+   GURU & STAFF
+========================================================= */
+
+#guru {
+    background: #f5f8f6;
+}
+
+#guru .card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all .3s ease;
+}
+
+#guru .card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(0, 107, 60, .13) !important;
+}
+
+#guru .card-img-top {
+    transition: transform .4s ease;
+}
+
+#guru .card:hover .card-img-top {
+    transform: scale(1.03);
+}
+
+#guru h5 {
+    color: var(--text-dark) !important;
+    font-size: 17px;
+}
+
+#guru .text-success {
+    color: var(--green) !important;
+}
+
+#guru .fa-user {
+    color: var(--green) !important;
+}
+
+
+/* =========================================================
+   BERITA
+========================================================= */
+
+#berita {
+    background: #ffffff;
+}
+
+#berita .card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all .3s ease;
+}
+
+#berita .card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(0, 107, 60, .13) !important;
+}
+
+#berita .card-img-top {
+    transition: transform .4s ease;
+}
+
+#berita .card:hover .card-img-top {
+    transform: scale(1.03);
+}
+
+#berita h5 {
+    line-height: 1.5;
+}
+
+#berita .text-success {
+    color: var(--green) !important;
+}
+
+#berita .text-warning {
+    color: var(--gold-dark) !important;
+}
+
+
+/* =========================================================
+   PENGUMUMAN
+========================================================= */
+
+#pengumuman {
+    background: var(--green-bg) !important;
+}
+
+#pengumuman .card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all .25s ease;
+}
+
+#pengumuman .card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 10px 25px rgba(0, 107, 60, .10) !important;
+}
+
+#pengumuman .border-left {
+    border-left: 4px solid var(--gold) !important;
+}
+
+#pengumuman h5 {
+    color: var(--text-dark) !important;
+}
+
+#pengumuman .text-success {
+    color: var(--green) !important;
+}
+
+
+/* =========================================================
+   EKSTRAKURIKULER
+========================================================= */
+
+#ekstrakurikuler {
+    background: #ffffff;
+}
+
+#ekstrakurikuler .card {
+    border-radius: 10px;
+    transition: all .3s ease;
+}
+
+#ekstrakurikuler .card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px rgba(0, 107, 60, .13) !important;
+}
+
+#ekstrakurikuler .card-img-top {
+    transition: transform .4s ease;
+}
+
+#ekstrakurikuler .card:hover .card-img-top {
+    transform: scale(1.04);
+}
+
+#ekstrakurikuler h5 {
+    color: var(--text-dark) !important;
+}
+
+#ekstrakurikuler .text-success {
+    color: var(--green) !important;
+}
+
+/* =========================
+   PRESTASI
+========================= */
+
+#prestasi {
+    scroll-margin-top: 80px;
+}
+
+#prestasi .card {
+    transition: all 0.3s ease;
+}
+
+#prestasi .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0, 107, 60, 0.12) !important;
+}
+
+#prestasi .text-success {
+    color: var(--green) !important;
+}
+
+
+/* =========================================================
+   GALERI
+========================================================= */
+
+#galeri {
+    background: var(--green-bg) !important;
+}
+
+#galeri .card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all .3s ease;
+}
+
+#galeri .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 107, 60, .12) !important;
+}
+
+#galeri img,
+#galeri video {
+    transition: transform .4s ease;
+}
+
+#galeri .card:hover img {
+    transform: scale(1.04);
+}
+
+/* HALAMAN TENTANG */
+.tentang-section {
+    background: #f5f9f7;
+}
+
+.profil-card,
+.visi-misi-card {
+    background: #fff;
+    border: 1px solid #e7efe9;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0, 75, 40, .07);
+}
+
+.profil-foto {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    object-fit: cover;
+    display: block;
+}
+
+.profil-foto-placeholder {
+    min-height: 420px;
+    height: 100%;
+    background: linear-gradient(135deg, #e5f5eb, #c8e8d4);
+    color: #078447;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profil-foto-placeholder i {
+    font-size: 70px;
+    margin-bottom: 18px;
+}
+
+.profil-foto-placeholder p {
+    font-weight: 700;
+}
+
+.profil-content {
+    padding: 38px;
+}
+
+.profil-label {
+    color: #078447;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.profil-content h2 {
+    color: #075b36;
+    font-size: 27px;
+    font-weight: 800;
+    margin: 12px 0 18px;
+}
+
+.profil-deskripsi {
+    color: #68796f;
+    line-height: 1.9;
+    margin-bottom: 25px;
+}
+
+.profil-info {
+    display: grid;
+    gap: 20px;
+}
+
+.profil-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.profil-info-item > i {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #e5f5eb;
+    color: #078447;
+}
+
+.profil-info-item div {
+    min-width: 0;
+}
+
+.profil-info-item span {
+    display: block;
+    color: #849087;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.profil-info-item strong {
+    display: block;
+    color: #345343;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.visi-misi-heading h2 {
+    color: #075b36;
+    font-weight: 800;
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.visi-misi-heading p {
+    color: #718077;
+    line-height: 1.8;
+}
+
+.visi-misi-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 28px 36px;
+    background: linear-gradient(135deg, #fff, #f1faf4);
+    border-bottom: 1px solid #e8f0eb;
+}
+
+.visi-misi-icon {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    background: #e0f3e7;
+    color: #078447;
+    font-size: 22px;
+}
+
+.visi-misi-header h3 {
+    color: #075b36;
+    font-size: 21px;
+    font-weight: 750;
+    margin: 0 0 5px;
+}
+
+.visi-misi-header p {
+    color: #7a8b81;
+    font-size: 13px;
+    margin: 0;
+}
+
+.visi-misi-content {
+    padding: 32px 40px 38px;
+}
+
+.visi-misi-text {
+    color: #52645a;
+    font-size: 15px;
+    line-height: 2;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 767px) {
+    .tentang-hero {
+        padding: 55px 0;
+    }
+
+    .profil-foto,
+    .profil-foto-placeholder {
+        min-height: 250px;
+        max-height: 300px;
+    }
+
+    .profil-content {
+        padding: 25px 22px;
+    }
+
+    .profil-content h2 {
+        font-size: 23px;
+    }
+
+    .visi-misi-heading h2 {
+        font-size: 25px;
+    }
+
+    .visi-misi-header {
+        padding: 22px 20px;
+        gap: 13px;
+    }
+
+    .visi-misi-header h3 {
+        font-size: 17px;
+    }
+
+    .visi-misi-content {
+        padding: 24px 22px 28px;
+    }
+
+    .visi-misi-text {
+        font-size: 14px;
+        line-height: 1.9;
+    }
+}
+
+/* =========================================================
+   BUTTON UMUM
+========================================================= */
+
+.btn-school {
+    background: var(--green-dark);
+    border: 2px solid var(--green-dark);
+    color: #ffffff !important;
+    font-weight: 600;
+    transition: all .25s ease;
+}
+
+.btn-school:hover {
+    background: var(--green-light);
+    border-color: var(--green-light);
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 107, 60, .20);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.school-footer {
+    background: linear-gradient(
+        135deg,
+        #004d2b,
+        #006b3c
+    ) !important;
+
+    color: #ffffff;
+}
+
+.school-footer h5 {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.school-footer p {
+    color: rgba(255, 255, 255, .75);
+    line-height: 1.8;
+}
+
+.school-footer i {
+    color: #64d49a;
+}
+
+.school-footer hr {
+    border-color: rgba(255, 255, 255, .18);
+}
+
+.school-footer .copyright {
+    color: rgba(255, 255, 255, .65);
+}
+
+
+/* =========================================================
+   SHADOW
+========================================================= */
+
+.shadow {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .12) !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 5px 18px rgba(0, 0, 0, .07) !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .navbar {
+        min-height: 70px;
+    }
+
+    .navbar .navbar-collapse {
+        background: #ffffff;
+        margin-top: 10px;
+        padding: 10px 0;
+        border-radius: 8px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+    }
+
+    .navbar .nav-link {
+        padding: 10px 15px !important;
+    }
+
+    #beranda h1 {
+        font-size: 42px;
+    }
+
+    #beranda h2 {
+        font-size: 48px;
+    }
+
+    .school-stat .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, .15);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 767.98px) {
+
+    html {
+        scroll-padding-top: 70px;
+    }
+
+    #beranda {
+        min-height: 700px !important;
+        padding-top: 100px !important;
+    }
+
+    #beranda h1 {
+        font-size: 30px;
+    }
+
+    #beranda h2 {
+        font-size: 38px;
+        line-height: 1.2;
+    }
+
+    #beranda .badge {
+        display: block;
+        width: fit-content;
+        margin: 0 auto 8px !important;
+    }
+
+    .btn-school-primary,
+    .btn-school-secondary {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .school-stat {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .school-stat h2 {
+        font-size: 26px;
+    }
+
+    .school-stat small {
+        font-size: 11px;
+    }
+
+    .section-title {
+        font-size: 27px;
+    }
+
+    #profil img,
+    #profil .bg-light {
+        height: 300px !important;
+    }
+
+    #guru .card-img-top,
+    #guru .bg-light {
+        height: 250px !important;
+    }
+
+    #berita .card-img-top,
+    #berita .bg-light {
+        height: 200px !important;
+    }
+
+    #ekstrakurikuler .card-img-top {
+        height: 200px !important;
+    }
+
+    #galeri img,
+    #galeri video {
+        height: 210px !important;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE - SMALL MOBILE
+========================================================= */
+
+@media (max-width: 575.98px) {
+
+    #beranda h1 {
+        font-size: 26px;
+    }
+
+    #beranda h2 {
+        font-size: 31px;
+    }
+
+    #beranda {
+        min-height: 650px !important;
+    }
+
+    .school-stat .col-6 {
+        width: 50%;
+    }
+
+    .school-stat .stat-item {
+        min-height: 100px;
+    }
+
+    .school-stat h2 {
+        font-size: 24px;
+    }
+
+    .school-stat small {
+        font-size: 10px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .section-label {
+        font-size: 10px;
+    }
+
+    .school-footer {
+        text-align: center;
+    }
+
+}

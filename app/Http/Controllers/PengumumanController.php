@@ -5,17 +5,44 @@ namespace App\Http\Controllers;
 use App\Models\Pengumuman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class PengumumanController extends Controller
 {
     /**
      * Menampilkan semua pengumuman
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pengumuman = Pengumuman::orderBy('tanggal', 'desc')->get();
+        $query = Pengumuman::with('user');
+
+        if ($request->filled('search')) {
+
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+
+                $q->where('judul', 'like', "%{$search}%")
+                ->orWhere('isi', 'like', "%{$search}%")
+                ->orWhere('status', 'like', "%{$search}%");
+
+            });
+        }
+
+        $pengumuman = $query
+            ->orderBy('tanggal', 'desc')
+            ->get();
 
         return view('admin.pengumuman.index', compact('pengumuman'));
+    }
+
+    public function public()
+    {
+        $pengumuman = Pengumuman::where('status', 'Publish')
+            ->orderBy('tanggal', 'desc')
+            ->get();
+
+        return view('public.pengumuman', compact('pengumuman'));
     }
 
     /**
@@ -36,6 +63,19 @@ class PengumumanController extends Controller
             'isi' => 'required|string',
             'tanggal' => 'required|date',
             'status' => 'required|in:Publish,Draft',
+        ], [
+            'judul.required' => 'Judul pengumuman wajib diisi.',
+            'judul.string' => 'Judul pengumuman harus berupa teks.',
+            'judul.max' => 'Judul pengumuman maksimal 255 karakter.',
+
+            'isi.required' => 'Isi pengumuman wajib diisi.',
+            'isi.string' => 'Isi pengumuman harus berupa teks.',
+
+            'tanggal.required' => 'Tanggal pengumuman wajib diisi.',
+            'tanggal.date' => 'Format tanggal pengumuman tidak valid.',
+
+            'status.required' => 'Status pengumuman wajib dipilih.',
+            'status.in' => 'Status pengumuman hanya boleh Publish atau Draft.',
         ]);
 
         Pengumuman::create([
@@ -54,17 +94,27 @@ class PengumumanController extends Controller
     /**
      * Menampilkan detail pengumuman
      */
-    public function show(Pengumuman $pengumuman)
+    public function show($id)
     {
-        return view('pengumuman.show', compact('pengumuman'));
+        $pengumuman = \App\Models\Pengumuman::findOrFail($id);
+        return view('admin.pengumuman.show', compact('pengumuman'));
     }
 
     /**
      * Form edit pengumuman
      */
-    public function edit(Pengumuman $pengumuman)
+    public function edit($id)
     {
-        return view('admin.pengumuman.edit', compact('pengumuman'));
+        try {
+            $id = Crypt::decrypt($id);
+
+            $pengumuman = Pengumuman::findOrFail($id);
+
+            return view('admin.pengumuman.edit', compact('pengumuman'));
+
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+            abort(404);
+        }
     }
 
     /**
@@ -77,6 +127,19 @@ class PengumumanController extends Controller
             'isi' => 'required|string',
             'tanggal' => 'required|date',
             'status' => 'required|in:Publish,Draft',
+        ], [
+            'judul.required' => 'Judul pengumuman wajib diisi.',
+            'judul.string' => 'Judul pengumuman harus berupa teks.',
+            'judul.max' => 'Judul pengumuman maksimal 255 karakter.',
+
+            'isi.required' => 'Isi pengumuman wajib diisi.',
+            'isi.string' => 'Isi pengumuman harus berupa teks.',
+
+            'tanggal.required' => 'Tanggal pengumuman wajib diisi.',
+            'tanggal.date' => 'Format tanggal pengumuman tidak valid.',
+
+            'status.required' => 'Status pengumuman wajib dipilih.',
+            'status.in' => 'Status pengumuman hanya boleh Publish atau Draft.',
         ]);
 
         $pengumuman->update([

@@ -402,7 +402,7 @@
 
 
                     <button type="submit"
-                            class="btn btn-primary">
+                            class="btn btn-green">
 
                         <i class="fas fa-save mr-1"></i>
                         Simpan Perubahan

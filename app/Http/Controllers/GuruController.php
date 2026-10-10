@@ -5,14 +5,38 @@ namespace App\Http\Controllers;
 use App\Models\Guru;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Crypt;
 
 class GuruController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $guru = Guru::orderBy('nama_guru', 'asc')->get();
+        $query = Guru::query();
+
+        if ($request->filled('search')) {
+
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+
+                $q->where('nama_guru', 'like', "%{$search}%")
+                ->orWhere('nip', 'like', "%{$search}%")
+                ->orWhere('mapel', 'like', "%{$search}%");
+
+            });
+        }
+
+        $guru = $query
+            ->orderBy('nama_guru', 'asc')
+            ->get();
 
         return view('admin.guru.index', compact('guru'));
+    }
+
+    public function public()
+    {
+        $guru = Guru::orderBy('nama_guru', 'asc')->get();
+        return view('public.guru', compact('guru'));
     }
 
     public function create()
@@ -24,9 +48,24 @@ class GuruController extends Controller
     {
         $request->validate([
             'nama_guru' => 'required|string|max:255',
-            'nip' => 'nullable|string|max:50',
+            'nip' => 'nullable|string|max:50|unique:guru,nip',
             'mapel' => 'nullable|string|max:255',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
+        ], [
+            'nama_guru.required' => 'Nama guru wajib diisi.',
+            'nama_guru.string' => 'Nama guru harus berupa teks.',
+            'nama_guru.max' => 'Nama guru maksimal 255 karakter.',
+
+            'nip.string' => 'NIP harus berupa teks.',
+            'nip.max' => 'NIP maksimal 50 karakter.',
+            'nip.unique' => 'NIP sudah terdaftar pada data guru lain.',
+
+            'mapel.string' => 'Mata pelajaran harus berupa teks.',
+            'mapel.max' => 'Mata pelajaran maksimal 255 karakter.',
+
+            'foto.image' => 'File yang diunggah harus berupa gambar.',
+            'foto.mimes' => 'Foto harus berformat JPG, JPEG, PNG, atau WEBP.',
+            'foto.max' => 'Ukuran foto maksimal 5 MB.',
         ]);
 
         $data = [
@@ -46,23 +85,48 @@ class GuruController extends Controller
             ->with('success', 'Data guru berhasil ditambahkan.');
     }
 
-    public function show(Guru $guru)
+    public function show($id)
     {
-        return view('guru.show', compact('guru'));
+        $guru = \App\Models\Guru::findOrFail($id);
+        return view('admin.guru.show', compact('guru'));
     }
 
-    public function edit(Guru $guru)
+    public function edit($id)
     {
-        return view('admin.guru.edit', compact('guru'));
+        try {
+            $id = Crypt::decrypt($id);
+
+            $guru = Guru::findOrFail($id);
+
+            return view('admin.guru.edit', compact('guru'));
+
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+            abort(404);
+        }
     }
 
     public function update(Request $request, Guru $guru)
     {
         $request->validate([
             'nama_guru' => 'required|string|max:255',
-            'nip' => 'nullable|string|max:50',
+            'nip' => 'nullable|string|max:50|unique:guru,nip' . $guru->id . ',id_guru',
             'mapel' => 'nullable|string|max:255',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
+        ], [
+            'nama_guru.required' => 'Nama guru wajib diisi.',
+            'nama_guru.string' => 'Nama guru harus berupa teks.',
+            'nama_guru.max' => 'Nama guru maksimal 255 karakter.',
+
+            'nip.string' => 'NIP harus berupa teks.',
+            'nip.max' => 'NIP maksimal 50 karakter.',
+            'nip.unique' => 'NIP sudah terdaftar pada data guru lain.',
+
+            'mapel.string' => 'Mata pelajaran harus berupa teks.',
+            'mapel.max' => 'Mata pelajaran maksimal 255 karakter.',
+
+            'foto.image' => 'File yang diunggah harus berupa gambar.',
+            'foto.mimes' => 'Foto harus berformat JPG, JPEG, PNG, atau WEBP.',
+            'foto.max' => 'Ukuran foto maksimal 5 MB.',
         ]);
 
         $data = [

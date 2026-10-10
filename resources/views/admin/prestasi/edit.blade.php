@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-4">
+<div class="header bg-gradient-green pb-8 pt-5 pt-md-4">
 
     <div class="container-fluid">
 
@@ -133,7 +133,7 @@
 
 
                 <button type="submit"
-                        class="btn btn-primary">
+                        class="btn btn-green">
 
                     <i class="fas fa-save"></i>
                     Update

@@ -1,135 +1,192 @@
-@extends('layouts.app')
+@extends('template.landing')
+
+@section('title')
+    {{ $galeri->judul }} - {{ $profil->nama_sekolah ?? 'SMPN 2 MANGUNREJA' }}
+@endsection
 
 @section('content')
 
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-4">
-    <div class="container-fluid">
-        <div class="header-body">
-            <h1 class="text-white">Detail Galeri</h1>
-            <p class="text-white">
-                Informasi lengkap dokumentasi sekolah.
-            </p>
-        </div>
-    </div>
-</div>
+<div style="
+    background:#f5f9f7;
+    padding-top:120px;
+    padding-bottom:70px;
+">
 
-<div class="container-fluid mt--7">
+    <div class="container">
 
-    <div class="row">
+        <div class="row justify-content-center">
 
-        {{-- Foto --}}
-        <div class="col-lg-7">
+            <div class="col-lg-10">
 
-            <div class="card shadow">
+                {{-- CARD DETAIL --}}
+                <div class="card border-0 shadow-sm"
+                     style="
+                        border-radius:18px;
+                        overflow:hidden;
+                     ">
 
-                <div class="card-body p-0">
+                    
+                    {{-- FOTO / VIDEO --}}
+                    <div style="
+                        background:#e8f5ee;
+                        text-align:center;
+                        padding:15px;
+                    ">
 
-                    @if ($galeri->file)
+                        @if($galeri->file)
 
-                        <img
-                            src="{{ asset('storage/galeri/' . $galeri->file) }}"
-                            alt="{{ $galeri->judul }}"
-                            class="img-fluid w-100"
-                            style="
-                                max-height:500px;
-                                object-fit:cover;
-                                border-radius:5px;
-                            "
-                        >
+                            @if($galeri->kategori === 'Foto')
 
-                    @else
+                                {{-- TAMPILAN FOTO --}}
+                                <img src="{{ asset('storage/' . $galeri->file) }}"
+                                    alt="{{ $galeri->judul }}"
+                                    class="img-fluid"
+                                    style="
+                                        width:100%;
+                                        max-height:600px;
+                                        object-fit:contain;
+                                    ">
 
-                        <div
-                            class="text-center text-muted py-5"
-                            style="height:400px;"
-                        >
-                            <i class="fas fa-image fa-4x mb-3"></i>
+                            @elseif($galeri->kategori === 'Video')
 
-                            <p>
-                                Tidak ada foto.
-                            </p>
-                        </div>
+                                {{-- TAMPILAN VIDEO --}}
+                                <video controls
+                                    preload="metadata"
+                                    playsinline
+                                    style="
+                                        width:100%;
+                                        max-height:600px;
+                                        background:#000;
+                                        object-fit:contain;
+                                    ">
 
-                    @endif
+                                    <source
+                                        src="{{ asset('storage/' . $galeri->file) }}"
+                                        type="video/mp4">
 
-                </div>
+                                    Browser kamu tidak mendukung pemutaran video ini.
+                                </video>
 
-            </div>
-
-        </div>
-
-        {{-- Informasi --}}
-        <div class="col-lg-5">
-
-            <div class="card shadow">
-
-                <div class="card-header">
-                    <h3 class="mb-0">
-                        {{ $galeri->judul }}
-                    </h3>
-                </div>
-
-                <div class="card-body">
-
-                    {{-- Kategori --}}
-                    <div class="mb-4">
-
-                        <small class="text-muted d-block">
-                            Kategori
-                        </small>
-
-                        <span class="badge badge-primary">
-                            {{ $galeri->kategori }}
-                        </span>
-
-                    </div>
-
-                    {{-- Tanggal --}}
-                    <div class="mb-4">
-
-                        <small class="text-muted d-block">
-                            Tanggal
-                        </small>
-
-                        <strong>
-                            @if ($galeri->tanggal)
-                                {{ \Carbon\Carbon::parse($galeri->tanggal)->translatedFormat('d F Y') }}
-                            @else
-                                -
                             @endif
-                        </strong>
+
+                        @else
+
+                            {{-- JIKA FILE KOSONG --}}
+                            <div style="
+                                height:400px;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                            ">
+
+                                <i class="fas fa-images fa-5x"
+                                style="color:#079447;"></i>
+
+                            </div>
+
+                        @endif
 
                     </div>
 
-                    {{-- Keterangan --}}
-                    <div class="mb-4">
 
-                        <small class="text-muted d-block">
-                            Keterangan
-                        </small>
 
-                        <p class="mt-2">
-                            {{ $galeri->keterangan ?: 'Tidak ada keterangan.' }}
-                        </p>
+                    {{-- INFORMASI --}}
+                    <div class="card-body p-4 p-md-5">
 
-                    </div>
+                        {{-- KATEGORI --}}
+                        @if($galeri->kategori)
 
-                    <hr>
+                            <span class="badge rounded-pill px-3 py-2 mb-3"
+                                  style="
+                                    background:#e8f5ee;
+                                    color:#006b3c;
+                                    font-size:13px;
+                                  ">
 
-                    {{-- Tombol --}}
-                    <div class="d-flex justify-content-between">
+                                <i class="fas fa-folder mr-1"></i>
 
-                        <a href="{{ route('galeri.index') }}"
-                           class="btn btn-secondary">
-                            <i class="fas fa-arrow-left mr-1"></i>
-                            Kembali
-                        </a>
+                                {{ $galeri->kategori }}
 
-                        <a href="{{ route('galeri.edit', $galeri->id) }}"
-                           class="btn btn-warning">
-                            <i class="fas fa-edit mr-1"></i>
-                            Edit
-                        </a>
+                            </span>
+
+                        @endif
+
+
+                        {{-- JUDUL --}}
+                        <h1 class="font-weight-bold mb-3"
+                            style="
+                                color:#173d2d;
+                                line-height:1.4;
+                            ">
+
+                            {{ $galeri->judul }}
+
+                        </h1>
+
+
+                        {{-- TANGGAL --}}
+                        @if($galeri->tanggal)
+
+                            <p class="text-muted mb-4">
+
+                                <i class="fas fa-calendar-alt mr-2"
+                                   style="color:#079447;"></i>
+
+                                {{ \Carbon\Carbon::parse($galeri->tanggal)->translatedFormat('d F Y') }}
+
+                            </p>
+
+                        @endif
+
+
+                        {{-- GARIS --}}
+                        <hr>
+
+
+                        {{-- KETERANGAN --}}
+                        @if($galeri->keterangan)
+
+                            <div class="mt-4">
+
+                                <h5 class="font-weight-bold mb-3"
+                                    style="color:#173d2d;">
+
+                                    Keterangan
+
+                                </h5>
+
+                                <div class="text-muted"
+                                     style="
+                                        line-height:1.9;
+                                        font-size:15px;
+                                     ">
+
+                                    {!! nl2br(e($galeri->keterangan)) !!}
+                                </div>
+
+                            </div>
+
+                        @endif
+
+
+                        {{-- TOMBOL --}}
+                        <div class="mt-4 pt-3">
+
+                            <a href="{{ url('/#galeri') }}"
+                               class="btn rounded-pill px-4"
+                               style="
+                                    background:#006b3c;
+                                    border-color:#006b3c;
+                                    color:white;
+                               ">
+
+                                <i class="fas fa-arrow-left mr-2"></i>
+
+                                Kembali ke Galeri
+
+                            </a>
+
+                        </div>
 
                     </div>
 

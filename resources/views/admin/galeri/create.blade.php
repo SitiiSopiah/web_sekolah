@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="header bg-gradient-primary pb-8 pt-5 pt-md-4">
+<div class="header bg-gradient-green pb-8 pt-5 pt-md-4">
     <div class="container-fluid">
         <div class="header-body">
             <h1 class="text-white">Tambah Galeri</h1>
@@ -160,7 +160,7 @@
                             </a>
 
                             <button type="submit"
-                                    class="btn btn-primary">
+                                    class="btn btn-green">
                                 <i class="fas fa-save mr-1"></i>
                                 Simpan
                             </button>

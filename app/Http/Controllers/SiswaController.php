@@ -4,15 +4,34 @@ namespace App\Http\Controllers;
 
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class SiswaController extends Controller
 {
     /**
      * Menampilkan semua data siswa
      */
-    public function index()
+    public function index(Request $request)
     {
-        $siswa = Siswa::orderBy('nama_siswa', 'asc')->get();
+        $query = Siswa::query();
+
+        if ($request->filled('search')) {
+
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+
+                $q->where('nisn', 'like', "%{$search}%")
+                ->orWhere('nama_siswa', 'like', "%{$search}%")
+                ->orWhere('jenis_kelamin', 'like', "%{$search}%")
+                ->orWhere('tahun_masuk', 'like', "%{$search}%");
+
+            });
+        }
+
+        $siswa = $query
+            ->orderBy('nama_siswa', 'asc')
+            ->get();
 
         return view('admin.siswa.index', compact('siswa'));
     }
@@ -60,9 +79,18 @@ class SiswaController extends Controller
     /**
      * Menampilkan form edit siswa
      */
-    public function edit(Siswa $siswa)
+    public function edit($id)
     {
-        return view('admin.siswa.edit', compact('siswa'));
+        try {
+            $id = Crypt::decrypt($id);
+
+            $siswa = Siswa::findOrFail($id);
+
+            return view('admin.siswa.edit', compact('siswa'));
+
+        } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+            abort(404);
+        }
     }
 
     /**

@@ -41,7 +41,7 @@
                 {{-- Tombol Edit --}}
                 <div class="col-md-3 text-md-right mt-3 mt-md-0">
                     <a href="{{ route('profil_sekolah.edit', $profil->id_profil) }}"
-                       class="btn btn-primary">
+                       class="btn btn-green">
                         <i class="fas fa-edit mr-1"></i>
                         Edit Profil
                     </a>
