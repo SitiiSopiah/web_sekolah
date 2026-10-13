@@ -125,10 +125,7 @@
                                         line-height:1.7;
                                    ">
 
-                                    {{ \Illuminate\Support\Str::limit(
-                                        strip_tags($item->deskripsi),
-                                        120
-                                    ) }}
+                                    {{ strip_tags($item->deskripsi) }}
 
                                 </p>
 

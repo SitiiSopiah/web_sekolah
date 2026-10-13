@@ -1,8 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
 
     <div class="container">
-
-        {{-- LOGO + NAMA --}}
         <a href="{{ url('/') }}"
            class="navbar-brand d-flex align-items-center py-2">
 
@@ -29,7 +27,7 @@
                      ">
 
             @endif
-
+            
             <div class="d-flex flex-column justify-content-center">
 
                 <span style="
@@ -41,7 +39,6 @@
                 ">
                     {{ $profil->nama_sekolah ?? 'SMPN 2 MANGUNREJA' }}
                 </span>
-
                 <small style="
                     color:#4e9a72;
                     font-size:9px;
@@ -51,13 +48,8 @@
                 ">
                     SISTEM INFORMASI SEKOLAH
                 </small>
-
             </div>
-
         </a>
-
-
-        {{-- TOGGLER --}}
         <button class="navbar-toggler"
                 type="button"
                 data-toggle="collapse"
@@ -65,47 +57,35 @@
                 aria-controls="navbarSekolah"
                 aria-expanded="false"
                 aria-label="Toggle navigation">
-
             <span class="navbar-toggler-icon"></span>
-
         </button>
-
-
-        {{-- MENU --}}
         <div class="collapse navbar-collapse"
              id="navbarSekolah">
-
-            
             <ul class="navbar-nav ml-auto align-items-lg-center">
-
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('/') ? 'active' : '' }}"
                     href="{{ url('/#beranda') }}">
                         BERANDA
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('public.profil_sekolah') ? 'active' : '' }}"
                     href="{{ route('public.profil_sekolah') }}">
                         TENTANG
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('public.guru') ? 'active' : '' }}"
                     href="{{ route('public.guru') }}">
                         GURU &amp; STAFF
                     </a>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('public.galeri') ? 'active' : '' }}"
                     href="{{ route('public.galeri') }}">
                         GALERI
                     </a>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ request()->routeIs('public.prestasi', 'public.ekstrakurikuler') ? 'active' : '' }}"
                     href="#"
@@ -116,20 +96,17 @@
                     aria-expanded="false">
                         POJOK SISWA
                     </a>
-
                     <div class="dropdown-menu" aria-labelledby="PojokSiswaDropdown">
                         <a class="dropdown-item {{ request()->routeIs('public.prestasi') ? 'active' : '' }}"
                         href="{{ route('public.prestasi') }}">
                             <i class="fas fa-trophy mr-2"></i> Prestasi
                         </a>
-
                         <a class="dropdown-item {{ request()->routeIs('public.ekstrakurikuler') ? 'active' : '' }}"
                         href="{{ route('public.ekstrakurikuler') }}">
                             <i class="fas fa-running mr-2"></i> Ekstrakurikuler
                         </a>
                     </div>
                 </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {{ request()->routeIs('public.berita', 'public.pengumuman') ? 'active' : '' }}"
                     href="#"
@@ -140,39 +117,31 @@
                     aria-expanded="false">
                         INFORMASI
                     </a>
-
                     <div class="dropdown-menu" aria-labelledby="informasiDropdown">
                         <a class="dropdown-item {{ request()->routeIs('public.berita') ? 'active' : '' }}"
                         href="{{ route('public.berita') }}">
                             <i class="fas fa-newspaper mr-2"></i> Berita
                         </a>
-
                         <a class="dropdown-item {{ request()->routeIs('public.pengumuman') ? 'active' : '' }}"
                         href="{{ route('public.pengumuman') }}">
                             <i class="fas fa-bullhorn mr-2"></i> Pengumuman
                         </a>
                     </div>
                 </li>
-
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('public.ujikom') ? 'active' : '' }}"
                     href="{{ route('public.ujikom') }}">
                         UJIKOM
                     </a>
                 </li>
-
             </ul>
-
         </div>
-
     </div>
     <div class="pe-5">
         <a href="{{ route('login') }}"
             class="btn btn-green">
-
             <i class="fas fa-user"></i>
             Login
-
         </a>
     </div>
 </nav>

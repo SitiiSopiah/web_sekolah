@@ -34,9 +34,6 @@
             </p>
 
         </div>
-
-
-        {{-- DAFTAR BERITA --}}
         <div class="row">
 
             @forelse($berita as $item)
@@ -46,7 +43,7 @@
                     <div class="card border-0 shadow-sm h-100"
                          style="border-radius:15px; overflow:hidden;">
 
-                        {{-- GAMBAR --}}
+
                         @if($item->gambar)
 
                             <img src="{{ asset('storage/' . $item->gambar) }}"
@@ -72,11 +69,7 @@
 
                         @endif
 
-
-                        {{-- ISI CARD --}}
                         <div class="card-body p-4">
-
-                            {{-- TANGGAL --}}
                             <div class="mb-2"
                                  style="
                                     color:#079447;
@@ -89,8 +82,6 @@
 
                             </div>
 
-
-                            {{-- JUDUL --}}
                             <h5 class="font-weight-bold"
                                 style="
                                     color:#173d2d;
@@ -101,20 +92,15 @@
 
                             </h5>
 
-
-                            {{-- ISI SINGKAT --}}
                             <p class="text-muted"
                                style="
                                     line-height:1.7;
                                     font-size:14px;
                                ">
 
-                                {{ \Illuminate\Support\Str::limit(strip_tags($item->isi), 120) }}
+                                {{ strip_tags($item->isi) }}
 
                             </p>
-
-
-                            {{-- BUTTON --}}
                             <a href="{{ route('berita.show', $item->getKey()) }}"
                                class="btn btn-sm rounded-pill px-3"
                                style="

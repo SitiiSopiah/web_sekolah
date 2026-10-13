@@ -98,7 +98,7 @@ a:hover {
     color: #f4bd36 !important;
     font-weight: 500 !important;
 }
-.navbar .navbar-nav .nav-item > .nav-link.active::after,
+/* .navbar .navbar-nav .nav-item > .nav-link.active::after,
 .navbar .navbar-nav .nav-item > .nav-link[aria-current="page"]::after {
     content: "";
     display: block;
@@ -107,7 +107,7 @@ a:hover {
     margin: 4px auto 0;
     background: #f4bd36;
     border-radius: 10px;
-}
+} */
 .navbar .dropdown-menu .dropdown-item {
     color: #173d2d !important;
 }
@@ -207,7 +207,18 @@ a:hover {
     color: #ffffff !important;
     transform: translateY(-2px);
 }
+.btn-green {
+    background-color: #006b3c;
+    border-color: #006b3c;
+    color: #fff !important;
+    font-weight: 600;
+}
 
+.btn-green:hover {
+    background-color: #00552f;
+    border-color: #00552f;
+    color: #fff !important;
+}
 
 /* =========================================================
    STATISTIK

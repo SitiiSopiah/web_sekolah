@@ -1,4 +1,3 @@
-
 @extends('template.landing')
 
 @section('title', 'Prestasi Sekolah - SMPN 2 MANGUNREJA')
@@ -180,7 +179,7 @@
                             </h2>
 
                             <p class="prestasi-description">
-                                {{ \Illuminate\Support\Str::limit($item->deskripsi, 100) }}
+                                {{ strip_tags($item->deskripsi) }}
                             </p>
 
                             <a

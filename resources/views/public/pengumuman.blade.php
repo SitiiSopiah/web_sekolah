@@ -91,10 +91,7 @@
                                     font-size:15px;
                                ">
 
-                                {{ \Illuminate\Support\Str::limit(
-                                    strip_tags($item->isi),
-                                    220
-                                ) }}
+                                {{ strip_tags($item->isi) }}
 
                             </p>
 

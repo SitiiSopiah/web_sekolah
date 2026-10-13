@@ -16,13 +16,9 @@
           type="image/png"
           href="{{ asset('assets/img/brand/favicon.png') }}">
 
-
-    {{-- BOOTSTRAP --}}
     <link rel="stylesheet"
           href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
 
-
-    {{-- FONT AWESOME --}}
     <link rel="stylesheet"
           href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}">
 
@@ -30,20 +26,6 @@
           href="{{ asset('assets/css/landing.css') }}">
 
     @stack('styles')
-    <style>
-      .btn-green {
-      background-color: #006b3c;
-      border-color: #006b3c;
-      color: #fff !important;
-      font-weight: 600;
-      }
-
-      .btn-green:hover {
-      background-color: #00552f;
-      border-color: #00552f;
-      color: #fff !important;
-      }
-    </style>
 
 </head>
 
@@ -52,12 +34,9 @@
 
     @include('template.navbarlanding')
 
-
     @yield('content')
 
-
     @include('template.footerlanding')
-
 
     <script src="{{ asset('assets/vendor/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>

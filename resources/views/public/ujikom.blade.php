@@ -4,55 +4,52 @@
 
 @section('content')
 <div class="container" style="padding-top:120px; padding-bottom:50px;">
-
     <h3>Form Input Nilai Ujikom</h3>
-
-    <form id="formUjikom">
+    <form method="GET" action="{{ url()->current() }}">
         <div class="form-group">
             <label>Input Nilai 1</label>
-            <input type="number" id="nilai1" class="form-control"
-                min="0" max="100" required>
+            <input type="number"
+                   name="nilai1"
+                   class="form-control"
+                   min="0"
+                   max="100"
+                   value="{{ request('nilai1') }}"
+                   required>
         </div>
-
         <div class="form-group">
             <label>Input Nilai 2</label>
-            <input type="number" id="nilai2" class="form-control"
-                min="0" max="100" required>
+            <input type="number"
+                   name="nilai2"
+                   class="form-control"
+                   min="0"
+                   max="100"
+                   value="{{ request('nilai2') }}"
+                   required>
         </div>
-
-        <button type="submit" class="btn btn-success">Hitung</button>
+        <button type="submit" class="btn btn-green">
+            Hitung
+        </button>
     </form>
-
-    <div id="hasil" style="display:none; margin-top:20px;">
-        <h3>Hasil Perhitungan</h3>
-        <p>Nilai 1: <span id="hasil1"></span></p>
-        <p>Nilai 2: <span id="hasil2"></span></p>
-        <p>Rata-rata: <span id="rata"></span></p>
-        <p>Keterangan: <span id="ket"></span></p>
-    </div>
-
+    @if (request()->has('nilai1') && request()->has('nilai2'))
+        @php
+            $nilai1 = (float) request('nilai1');
+            $nilai2 = (float) request('nilai2');
+            $rata = ($nilai1 + $nilai2) / 2;
+        @endphp
+        <div class="mt-4">
+            <h3>Hasil Perhitungan</h3>
+            <p>Nilai 1: {{ $nilai1 }}</p>
+            <p>Nilai 2: {{ $nilai2 }}</p>
+            <p>Rata-rata: {{ $rata }}</p>
+            <p>
+                Keterangan:
+                @if ($rata >= 70)
+                    <p>LULUS</p>
+                @else
+                    <p>TIDAK LULUS</p>
+                @endif
+            </p>
+        </div>
+    @endif
 </div>
-
-<script>
-document.getElementById('formUjikom').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const n1 = Number(document.getElementById('nilai1').value);
-    const n2 = Number(document.getElementById('nilai2').value);
-
-    if (n1 < 0 || n1 > 100 || n2 < 0 || n2 > 100) {
-        alert('Nilai harus antara 0 sampai 100.');
-        return;
-    }
-
-    const rata = (n1 + n2) / 2;
-    const ket = rata >= 70 ? 'Lulus' : 'Tidak Lulus';
-
-    document.getElementById('hasil1').textContent = n1;
-    document.getElementById('hasil2').textContent = n2;
-    document.getElementById('rata').textContent = rata;
-    document.getElementById('ket').textContent = ket;
-    document.getElementById('hasil').style.display = 'block';
-});
-</script>
 @endsection
