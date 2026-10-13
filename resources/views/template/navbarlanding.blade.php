@@ -75,100 +75,90 @@
         <div class="collapse navbar-collapse"
              id="navbarSekolah">
 
+            
             <ul class="navbar-nav ml-auto align-items-lg-center">
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('/#beranda') ? 'active' : '' }}" 
-                       href="{{ url('/#beranda') }}">
+                    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}"
+                    href="{{ url('/#beranda') }}">
                         BERANDA
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('/#profil') ? 'active' : '' }}" 
-                        href="{{ route('public.profil_sekolah') }}">
+                    <a class="nav-link {{ request()->routeIs('public.profil_sekolah') ? 'active' : '' }}"
+                    href="{{ route('public.profil_sekolah') }}">
                         TENTANG
-                    </a>
-                </li>
-                
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('/#guru') ? 'active' : '' }}" 
-                       href="{{ route('public.guru') }}">
-                        GURU & STAFF
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('/#galeri') ? 'active' : '' }}" 
-                       href="{{ route('public.galeri') }}">
+                    <a class="nav-link {{ request()->routeIs('public.guru') ? 'active' : '' }}"
+                    href="{{ route('public.guru') }}">
+                        GURU &amp; STAFF
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('public.galeri') ? 'active' : '' }}"
+                    href="{{ route('public.galeri') }}">
                         GALERI
                     </a>
                 </li>
 
                 <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       id="PojokSiswaDropdown"
-                       role="button"
-                       data-toggle="dropdown">
-
+                    <a class="nav-link dropdown-toggle {{ request()->routeIs('public.prestasi', 'public.ekstrakurikuler') ? 'active' : '' }}"
+                    href="#"
+                    id="PojokSiswaDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
                         POJOK SISWA
-
                     </a>
 
-                    <div class="dropdown-menu">
-
-                        <a class="dropdown-item {{ request()->is('/#prestasi') ? 'active' : '' }}"
-                            href="{{ route('public.prestasi') }}">
-
-                            <i class="fas fa-trophy"></i>
-                            Prestasi
+                    <div class="dropdown-menu" aria-labelledby="PojokSiswaDropdown">
+                        <a class="dropdown-item {{ request()->routeIs('public.prestasi') ? 'active' : '' }}"
+                        href="{{ route('public.prestasi') }}">
+                            <i class="fas fa-trophy mr-2"></i> Prestasi
                         </a>
 
-                        <a class="dropdown-item {{ request()->is('/#ekstrakurikuler') ? 'active' : '' }}"
-                            href="{{ route('public.ekstrakurikuler') }}">
-
-                            <i class="fas fa-running"></i>
-                            Ekstrakurikuler
+                        <a class="dropdown-item {{ request()->routeIs('public.ekstrakurikuler') ? 'active' : '' }}"
+                        href="{{ route('public.ekstrakurikuler') }}">
+                            <i class="fas fa-running mr-2"></i> Ekstrakurikuler
                         </a>
-
                     </div>
-
                 </li>
 
                 <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       id="informasiDropdown"
-                       role="button"
-                       data-toggle="dropdown">
-
+                    <a class="nav-link dropdown-toggle {{ request()->routeIs('public.berita', 'public.pengumuman') ? 'active' : '' }}"
+                    href="#"
+                    id="informasiDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
                         INFORMASI
-
                     </a>
 
-                    <div class="dropdown-menu">
-
-                        <a class="dropdown-item {{ request()->is('/#berita') ? 'active' : '' }}"
-                           href="{{ route('public.berita') }}">
-
-                            <i class="fas fa-newspaper mr-2"></i>
-                            Berita
-
+                    <div class="dropdown-menu" aria-labelledby="informasiDropdown">
+                        <a class="dropdown-item {{ request()->routeIs('public.berita') ? 'active' : '' }}"
+                        href="{{ route('public.berita') }}">
+                            <i class="fas fa-newspaper mr-2"></i> Berita
                         </a>
 
-                        <a class="dropdown-item {{ request()->is('/#pengumuman') ? 'active' : '' }}"
-                           href="{{ route('public.pengumuman') }}">
-
-                            <i class="fas fa-bullhorn mr-2"></i>
-                            Pengumuman
-
+                        <a class="dropdown-item {{ request()->routeIs('public.pengumuman') ? 'active' : '' }}"
+                        href="{{ route('public.pengumuman') }}">
+                            <i class="fas fa-bullhorn mr-2"></i> Pengumuman
                         </a>
-
                     </div>
+                </li>
 
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('public.ujikom') ? 'active' : '' }}"
+                    href="{{ route('public.ujikom') }}">
+                        UJIKOM
+                    </a>
                 </li>
 
             </ul>
@@ -176,5 +166,13 @@
         </div>
 
     </div>
+    <div class="pe-5">
+        <a href="{{ route('login') }}"
+            class="btn btn-green">
 
+            <i class="fas fa-user"></i>
+            Login
+
+        </a>
+    </div>
 </nav>

@@ -43,6 +43,42 @@
             border-color: #00552f;
             color: #fff !important;
         }
+        #sidenav-main {
+            transition: transform 0.3s ease;
+        }
+
+        /* Sidebar ketika dibuka di layar mobile */
+        @media (max-width: 991.98px) {
+            #sidenav-main {
+                transform: translateX(-100%);
+                z-index: 1050;
+            }
+
+            #sidenav-main.sidebar-open {
+                transform: translateX(0);
+            }
+        }
+
+        /* Tombol toggle di kiri navbar */
+        #sidebarToggle {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            padding: 0;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        /* Navbar: toggle kiri, admin kanan */
+        #navbar-main .container-fluid {
+            display: flex;
+            align-items: center;
+        }
+
+        #navbar-main .navbar-nav {
+            margin-left: auto;
+        }
     </style>
 
 </head>
@@ -87,6 +123,38 @@
 
 
     @stack('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sidebar = document.getElementById('sidenav-main');
+            const toggle = document.getElementById('sidebarToggle');
+
+            if (!sidebar || !toggle) return;
+
+            toggle.addEventListener('click', function () {
+                sidebar.classList.toggle('sidebar-open');
+                document.body.classList.toggle('sidebar-active');
+            });
+
+            document.addEventListener('click', function (event) {
+                if (
+                    window.innerWidth <= 991.98 &&
+                    sidebar.classList.contains('sidebar-open') &&
+                    !sidebar.contains(event.target) &&
+                    !toggle.contains(event.target)
+                ) {
+                    sidebar.classList.remove('sidebar-open');
+                    document.body.classList.remove('sidebar-active');
+                }
+            });
+
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 991.98) {
+                    sidebar.classList.remove('sidebar-open');
+                    document.body.classList.remove('sidebar-active');
+                }
+            });
+        });
+    </script>
 
 </body>
 

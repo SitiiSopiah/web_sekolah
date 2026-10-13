@@ -30,6 +30,20 @@
           href="{{ asset('assets/css/landing.css') }}">
 
     @stack('styles')
+    <style>
+      .btn-green {
+      background-color: #006b3c;
+      border-color: #006b3c;
+      color: #fff !important;
+      font-weight: 600;
+      }
+
+      .btn-green:hover {
+      background-color: #00552f;
+      border-color: #00552f;
+      color: #fff !important;
+      }
+    </style>
 
 </head>
 

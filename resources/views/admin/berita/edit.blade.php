@@ -3,218 +3,114 @@
 @section('content')
 
 <div class="header bg-gradient-green pb-8 pt-5 pt-md-4">
-
     <div class="container-fluid">
-
-        <h1 class="text-white">
-            Edit Berita
-        </h1>
-
-        <p class="text-white">
-            Perbarui data berita
-        </p>
-
+        <h1 class="text-white">Edit Berita</h1>
+        <p class="text-white">Perbarui data berita</p>
     </div>
-
 </div>
 
-
-<div class="container-fluid mt--7">
-
+<div class="container-fluid mt--7 pb-5">
     <div class="card shadow">
-
-        <div class="card-header">
-
-            <h3 class="mb-0">
-                Form Edit Berita
-            </h3>
-
+        <div class="card-header bg-white">
+            <h3 class="mb-0">Form Edit Berita</h3>
         </div>
-
 
         <div class="card-body">
 
             @if($errors->any())
-
                 <div class="alert alert-danger">
-
                     <ul class="mb-0">
-
                         @foreach($errors->all() as $error)
-
                             <li>{{ $error }}</li>
-
                         @endforeach
-
                     </ul>
-
                 </div>
-
             @endif
 
-
-            <form
-                action="{{ route('berita.update', $berita->id_berita) }}"
-                method="POST"
-                enctype="multipart/form-data"
-            >
+            <form action="{{ route('berita.update', $berita->id_berita) }}"
+                  method="POST"
+                  enctype="multipart/form-data">
 
                 @csrf
                 @method('PUT')
 
-
                 <div class="form-group">
-
-                    <label>
-                        Judul Berita
-                    </label>
-
-                    <input
-                        type="text"
-                        name="judul"
-                        class="form-control"
-                        value="{{ old('judul', $berita->judul) }}"
-                        required
-                    >
-
+                    <label>Judul Berita</label>
+                    <input type="text"
+                           name="judul"
+                           class="form-control"
+                           value="{{ old('judul', $berita->judul) }}"
+                           required>
                 </div>
 
-
                 <div class="form-group">
-
-                    <label>
-                        Isi Berita
-                    </label>
-
-                    <textarea
-                        name="isi"
-                        class="form-control"
-                        rows="8"
-                        required
-                    >{{ old('isi', $berita->isi) }}</textarea>
-
+                    <label>Isi Berita</label>
+                    <textarea name="isi"
+                              class="form-control"
+                              rows="8"
+                              required>{{ old('isi', $berita->isi) }}</textarea>
                 </div>
 
-
                 <div class="form-group">
-
-                    <label>
-                        Tanggal
-                    </label>
-
-                    <input
-                        type="date"
-                        name="tanggal"
-                        class="form-control"
-                        value="{{ old('tanggal', optional($berita->tanggal)->format('Y-m-d')) }}"
-                        required
-                    >
-
+                    <label>Tanggal</label>
+                    <input type="date"
+                           name="tanggal"
+                           class="form-control"
+                           value="{{ old('tanggal', $berita->tanggal ? \Carbon\Carbon::parse($berita->tanggal)->format('Y-m-d') : '') }}"
+                           required>
                 </div>
-
 
                 @if($berita->gambar)
-
                     <div class="form-group">
-
-                        <label>
-                            Gambar Saat Ini
-                        </label>
-
+                        <label>Gambar Saat Ini</label>
                         <br>
-
-                        <img
-                            src="{{ asset('storage/' . $berita->gambar) }}"
-                            alt="{{ $berita->judul }}"
-                            width="200"
-                            height="130"
-                            style="
-                                object-fit: cover;
-                                border-radius: 8px;
-                            "
-                        >
-
+                        <img src="{{ asset('storage/' . $berita->gambar) }}"
+                             alt="{{ $berita->judul }}"
+                             width="200"
+                             height="130"
+                             style="object-fit: cover; border-radius: 8px;">
                     </div>
-
                 @endif
 
-
                 <div class="form-group">
-
-                    <label>
-                        Ganti Gambar
-                    </label>
-
-                    <input
-                        type="file"
-                        name="gambar"
-                        class="form-control-file"
-                        accept="image/*"
-                    >
+                    <label>Ganti Gambar</label>
+                    <input type="file"
+                           name="gambar"
+                           class="form-control-file"
+                           accept=".jpg,.jpeg,.png,.webp">
 
                     <small class="text-muted">
                         Kosongkan jika tidak ingin mengganti gambar.
                     </small>
-
                 </div>
 
-
                 <div class="form-group">
-
-                    <label>
-                        Status
-                    </label>
-
-                    <select
-                        name="status"
-                        class="form-control"
-                        required
-                    >
-
+                    <label>Status</label>
+                    <select name="status" class="form-control" required>
                         <option value="Draft"
-                            {{ old('status', $berita->status) == 'Draft'
-                                ? 'selected'
-                                : '' }}>
+                            {{ old('status', $berita->status) == 'Draft' ? 'selected' : '' }}>
                             Draft
                         </option>
 
                         <option value="Publish"
-                            {{ old('status', $berita->status) == 'Publish'
-                                ? 'selected'
-                                : '' }}>
+                            {{ old('status', $berita->status) == 'Publish' ? 'selected' : '' }}>
                             Publish
                         </option>
-
                     </select>
-
                 </div>
 
-
-                <a
-                    href="{{ route('berita.index') }}"
-                    class="btn btn-secondary"
-                >
-                    <i class="fas fa-arrow-left"></i>
-                    Kembali
+                <a href="{{ route('berita.index') }}"
+                   class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Kembali
                 </a>
 
-
-                <button
-                    type="submit"
-                    class="btn btn-green"
-                >
-
-                    <i class="fas fa-save"></i>
-                    Simpan Perubahan
-
+                <button type="submit" class="btn btn-green">
+                    <i class="fas fa-save"></i> Update
                 </button>
 
             </form>
-
         </div>
-
     </div>
-
 </div>
 
 @endsection

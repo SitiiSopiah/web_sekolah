@@ -48,7 +48,7 @@ class GuruController extends Controller
     {
         $request->validate([
             'nama_guru' => 'required|string|max:255',
-            'nip' => 'nullable|string|max:50|unique:guru,nip',
+            'nip' => 'nullable|string|max:50|unique:gurus,nip',
             'mapel' => 'nullable|string|max:255',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ], [
@@ -104,26 +104,28 @@ class GuruController extends Controller
             abort(404);
         }
     }
-
     public function update(Request $request, Guru $guru)
     {
         $request->validate([
             'nama_guru' => 'required|string|max:255',
-            'nip' => 'nullable|string|max:50|unique:guru,nip' . $guru->id . ',id_guru',
+            'nip' => [
+                'nullable',
+                'string',
+                'max:50',
+                \Illuminate\Validation\Rule::unique('gurus', 'nip')
+                    ->ignore($guru->id_guru, 'id_guru'),
+            ],
             'mapel' => 'nullable|string|max:255',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ], [
             'nama_guru.required' => 'Nama guru wajib diisi.',
             'nama_guru.string' => 'Nama guru harus berupa teks.',
             'nama_guru.max' => 'Nama guru maksimal 255 karakter.',
-
             'nip.string' => 'NIP harus berupa teks.',
             'nip.max' => 'NIP maksimal 50 karakter.',
             'nip.unique' => 'NIP sudah terdaftar pada data guru lain.',
-
             'mapel.string' => 'Mata pelajaran harus berupa teks.',
             'mapel.max' => 'Mata pelajaran maksimal 255 karakter.',
-
             'foto.image' => 'File yang diunggah harus berupa gambar.',
             'foto.mimes' => 'Foto harus berformat JPG, JPEG, PNG, atau WEBP.',
             'foto.max' => 'Ukuran foto maksimal 5 MB.',
@@ -136,8 +138,7 @@ class GuruController extends Controller
         ];
 
         if ($request->hasFile('foto')) {
-
-            // Hapus foto lama
+            // Hapus foto lama jika tersedia
             if ($guru->foto && Storage::disk('public')->exists($guru->foto)) {
                 Storage::disk('public')->delete($guru->foto);
             }

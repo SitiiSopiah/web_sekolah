@@ -17,6 +17,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\UjikomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,9 @@ Route::get('/prestasi/public', [PrestasiController::class, 'public'])
 
 Route::get('/profil-sekolah/public', [ProfilSekolahController::class, 'public'])
     ->name('public.profil_sekolah');
+
+Route::get('/ujikom/public', [UjikomController::class, 'public'])
+    ->name('public.ujikom');
 
 // Detail 
 Route::get('/guru/detail/{guru}', [GuruController::class, 'show'])

@@ -1,4 +1,4 @@
-<nav id="schoolSidebar" class="school-sidebar">
+<nav id="sidenav-main" class="school-sidebar">
 
     {{-- HEADER --}}
     <div class="school-sidebar-header">
@@ -633,17 +633,26 @@
     ========================================================= */
 
     @media (max-width: 991.98px) {
-
         .school-sidebar {
             transform: translateX(-100%);
-
             transition: transform .25s ease;
+        }
+
+        .school-sidebar.sidebar-open {
+            transform: translateX(0);
         }
 
         .main-content {
             margin-left: 0 !important;
         }
 
+        body.sidebar-active::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .4);
+            z-index: 99998;
+        }
     }
 
 </style>

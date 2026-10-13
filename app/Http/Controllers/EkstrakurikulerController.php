@@ -6,6 +6,7 @@ use App\Models\Ekstrakurikuler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 class EkstrakurikulerController extends Controller
 {
@@ -78,6 +79,7 @@ class EkstrakurikulerController extends Controller
 
         $data = [
             'nama_ekskul' => $request->nama_ekskul,
+            'slug' => Str::slug($request->nama_ekskul),
             'pembina' => $request->pembina,
             'jadwal_latihan' => $request->jadwal_latihan,
             'deskripsi' => $request->deskripsi,
@@ -140,6 +142,7 @@ class EkstrakurikulerController extends Controller
 
         $data = [
             'nama_ekskul' => $request->nama_ekskul,
+            'slug' => Str::slug($request->nama_ekskul),
             'pembina' => $request->pembina,
             'jadwal_latihan' => $request->jadwal_latihan,
             'deskripsi' => $request->deskripsi,

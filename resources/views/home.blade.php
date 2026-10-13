@@ -232,7 +232,7 @@
 
                     Puji syukur ke hadirat Tuhan YME atas segala rahmat
                     dan karunia-Nya. Selamat datang di website resmi
-                    {{ $profil->nama_sekolah ?? 'SMPN 2 MANGUNREJA' }}.
+                    {{ $profil->nama_sekolah }}.
                     Website ini kami hadirkan sebagai sarana informasi
                     dan komunikasi antara sekolah dengan orang tua,
                     peserta didik, serta masyarakat luas.

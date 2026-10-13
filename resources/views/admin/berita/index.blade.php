@@ -60,6 +60,23 @@
                                         <i class="fas fa-search"></i>
 
                                     </button>
+                                    {{-- Tombol Reset --}}
+                                    @if(request('search'))
+                                        <a
+                                            href="{{ route('siswa.index') }}"
+                                            class="btn btn-white"
+                                            title="Hapus pencarian"
+                                            style="
+                                                height: 44px;
+                                                border-radius: 0 6px 6px 0;
+                                                margin: 0;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                            ">
+                                            <i class="fas fa-times text-danger"></i>
+                                        </a>
+                                    @endif
 
                                 </div>
 
@@ -182,7 +199,7 @@
                             <td>
 
                                 <strong>
-                                    {{ $item->judul }}
+                                    {{ Str::limit($item->judul, 50) }}
                                 </strong>
 
                             </td>
@@ -212,7 +229,7 @@
                                     overflow-wrap: anywhere;
                                 ">
 
-                                    {{ $item->isi }}
+                                    {{ Str::limit($item->isi, 60) }}
 
                                 </div>
 
@@ -336,84 +353,84 @@
 
 <script>
 
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
 
-    document.querySelectorAll('.status-switch').forEach(function (switchElement) {
+        document.querySelectorAll('.status-switch').forEach(function (switchElement) {
 
-        switchElement.addEventListener('change', function () {
+            switchElement.addEventListener('change', function () {
 
-            const checkbox = this;
+                const checkbox = this;
 
-            const id = checkbox.dataset.id;
+                const id = checkbox.dataset.id;
 
-            const statusText = checkbox
-                .closest('.custom-control')
-                .querySelector('.status-text');
+                const statusText = checkbox
+                    .closest('.custom-control')
+                    .querySelector('.status-text');
 
-            const status = checkbox.checked
-                ? 'Publish'
-                : 'Draft';
+                const status = checkbox.checked
+                    ? 'Publish'
+                    : 'Draft';
 
 
-            fetch(`/berita/${id}/status`, {
+                fetch(`/berita/${id}/status`, {
 
-                method: 'PATCH',
+                    method: 'PATCH',
 
-                headers: {
+                    headers: {
 
-                    'Content-Type': 'application/json',
+                        'Content-Type': 'application/json',
 
-                    'X-CSRF-TOKEN':
-                        '{{ csrf_token() }}',
+                        'X-CSRF-TOKEN':
+                            '{{ csrf_token() }}',
 
-                    'Accept':
-                        'application/json'
+                        'Accept':
+                            'application/json'
 
-                },
+                    },
 
-                body: JSON.stringify({
-                    status: status
+                    body: JSON.stringify({
+                        status: status
+                    })
+
                 })
 
-            })
+                .then(response => {
 
-            .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Gagal mengubah status');
+                    }
 
-                if (!response.ok) {
-                    throw new Error('Gagal mengubah status');
-                }
+                    return response.json();
 
-                return response.json();
+                })
 
-            })
+                .then(data => {
 
-            .then(data => {
+                    if (data.success) {
 
-                if (data.success) {
+                        statusText.textContent =
+                            data.status;
 
-                    statusText.textContent =
-                        data.status;
+                    }
 
-                }
+                })
 
-            })
+                .catch(error => {
 
-            .catch(error => {
+                    console.error(error);
 
-                console.error(error);
+                    checkbox.checked =
+                        !checkbox.checked;
 
-                checkbox.checked =
-                    !checkbox.checked;
+                    alert('Status gagal diperbarui.');
 
-                alert('Status gagal diperbarui.');
+                });
 
             });
 
         });
 
     });
-
-});
 
 </script>
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="header bg-gradient-green pb-8 pt-5 pt-md-8">
+<div class="header bg-gradient-green pb-8 pt-5 pt-md-4">
     <div class="container-fluid">
 
         <h1 class="text-white">

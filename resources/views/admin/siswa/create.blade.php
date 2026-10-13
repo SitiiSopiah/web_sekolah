@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="header bg-gradient-green pb-8 pt-5 pt-md-4">
-    <div class="container-fluid">
+    <div class="container-fluid mt-4">
         <div class="header-body">
             <h1 class="text-white">Tambah Siswa</h1>
             <p class="text-white mb-0">

@@ -52,16 +52,16 @@ class HomeController extends Controller
 
         // Ekstrakurikuler
         $ekstrakurikuler = Ekstrakurikuler::latest()
-            ->take(6)
+            ->take(3)
             ->get();
 
         // Galeri
         $galeri = Galeri::orderBy('tanggal', 'desc')
-            ->take(6)
+            ->take(3)
             ->get();
 
         $prestasi = Prestasi::orderBy('tahun_ajaran', 'desc')
-            ->take(6)
+            ->take(3)
             ->get();
             
 

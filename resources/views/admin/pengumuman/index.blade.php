@@ -49,6 +49,23 @@
                                         <i class="fas fa-search"></i>
 
                                     </button>
+                                    {{-- Tombol Reset --}}
+                                    @if(request('search'))
+                                        <a
+                                            href="{{ route('siswa.index') }}"
+                                            class="btn btn-white"
+                                            title="Hapus pencarian"
+                                            style="
+                                                height: 44px;
+                                                border-radius: 0 6px 6px 0;
+                                                margin: 0;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                            ">
+                                            <i class="fas fa-times text-danger"></i>
+                                        </a>
+                                    @endif
 
                                 </div>
 

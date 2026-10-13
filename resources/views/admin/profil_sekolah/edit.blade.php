@@ -10,7 +10,7 @@
             <div class="d-flex align-items-center">
 
                 <div class="mr-3">
-                    <div class="icon icon-shape bg-primary text-white rounded-circle shadow">
+                    <div class="icon icon-shape bg-green text-white rounded-circle shadow">
                         <i class="fas fa-edit"></i>
                     </div>
                 </div>
@@ -271,7 +271,7 @@
 
                                 @if($profilSekolah->logo)
 
-                                    <img src="{{ asset('storage/profil/' . $profilSekolah->logo) }}"
+                                    <img src="{{ asset('storage/' . $profilSekolah->logo) }}"
                                          style="width:100%; height:100%; object-fit:contain;"
                                          alt="Logo Sekolah">
 
@@ -336,7 +336,7 @@
 
                                 @if($profilSekolah->foto)
 
-                                    <img src="{{ asset('storage/profil/' . $profilSekolah->foto) }}"
+                                    <img src="{{ asset('storage/' . $profilSekolah->foto) }}"
                                          style="width:100%; height:100%; object-fit:cover;"
                                          alt="Foto Kepala Sekolah">
 

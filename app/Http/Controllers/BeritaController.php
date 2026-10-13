@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 class BeritaController extends Controller
 {
@@ -50,15 +51,15 @@ class BeritaController extends Controller
 
     public function store(Request $request)
     {
-        $slug = Str::slug($request->judul);
-        $request->merge(['slug' => $slug]);
+        // $slug = Str::slug($request->judul);
+        // $request->merge(['slug' => $slug]);
         $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
             'tanggal' => 'required|date',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'status' => 'required|in:Publish,Draft',
-            'slug' => 'required|string|max:255|unique:beritas,slug',
+            // 'slug' => 'required|string|max:255|unique:beritas,slug',
         ], [
             'judul.required' => 'Judul berita wajib diisi.',
             'judul.string' => 'Judul berita harus berupa teks.',
@@ -79,10 +80,10 @@ class BeritaController extends Controller
         ]);
         $data = [
             'judul' => $request->judul,
+            'slug' => Str::slug($request->judul),
             'isi' => $request->isi,
             'tanggal' => $request->tanggal,
             'status' => $request->status,
-            'slug' => $request->slug,
             'id_user' => Auth::id(),
         ];
 
@@ -118,8 +119,9 @@ class BeritaController extends Controller
         }
     }
 
-    public function update(Request $request, Berita $berita)
+    public function update(Request $request, $id)
     {
+        $berita = Berita::where('id_berita', $id)->firstOrFail();
         $request->validate([
             'judul' => 'required|string|max:255',
             'isi' => 'required|string',
@@ -146,6 +148,7 @@ class BeritaController extends Controller
 
         $data = [
             'judul' => $request->judul,
+            'slug' => Str::slug($request->judul),
             'isi' => $request->isi,
             'tanggal' => $request->tanggal,
             'status' => $request->status,

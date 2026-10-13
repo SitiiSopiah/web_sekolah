@@ -17,8 +17,7 @@
             
             <div class="col-lg-7 col-7">
                 <div class="d-flex justify-content-end align-items-center">
-
-                    {{-- Search --}}
+                    {{-- Search Siswa --}}
                     <form action="{{ route('siswa.index') }}"
                         method="GET"
                         class="mr-2">
@@ -39,24 +38,40 @@
                                 "
                             >
 
+                            {{-- Tombol Search --}}
                             <div class="input-group-append">
-
-                                <button type="submit"
-                                        class="btn btn-white"
-                                        style="
-                                            height: 44px;
-                                            border-radius: 0 6px 6px 0;
-                                            margin: 0;
-                                        ">
-
+                                <button
+                                    type="submit"
+                                    class="btn btn-white"
+                                    title="Cari siswa"
+                                    style="
+                                        height: 44px;
+                                        border-radius: 0 6px 6px 0;
+                                        margin: 0;
+                                    ">
                                     <i class="fas fa-search"></i>
-
                                 </button>
 
+                                {{-- Tombol Reset --}}
+                                @if(request('search'))
+                                    <a
+                                        href="{{ route('siswa.index') }}"
+                                        class="btn btn-white"
+                                        title="Hapus pencarian"
+                                        style="
+                                            height: 44px;
+                                            border-radius: 6px;
+                                            margin: 0;
+                                            display: flex;
+                                            align-items: center;
+                                            justify-content: center;
+                                        ">
+                                        <i class="fas fa-times text-danger"></i>
+                                    </a>
+                                @endif
                             </div>
 
                         </div>
-
                     </form>
 
                     @if(auth()->user()->role === 'Admin')

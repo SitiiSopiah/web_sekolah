@@ -52,18 +52,6 @@ a:hover {
     object-fit: contain;
 }
 
-.navbar .nav-link {
-    color: var(--green-dark) !important;
-    font-size: 14px;
-    font-weight: 500;
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-}
-
-.navbar .nav-link:hover {
-    color: var(--green-light) !important;
-}
-
 .navbar-toggler {
     border-color: var(--green-dark);
 }
@@ -93,12 +81,25 @@ a:hover {
     color: var(--green-dark);
 }
 
-.navbar .navbar-nav .nav-link.active {
-    color: #f4bd36 !important;
-    font-weight: 700;
+.navbar .navbar-nav .nav-item > .nav-link {
+    color: #006b3c !important;
+    font-weight: 500 !important;
+    transition: color 0.3s ease;
 }
 
-.navbar .navbar-nav .nav-link.active::after {
+.navbar .navbar-nav .nav-item > .nav-link:hover,
+.navbar .navbar-nav .nav-item > .nav-link:focus,
+.navbar .navbar-nav .nav-item.show > .nav-link {
+    color: #f4bd36 !important;
+}
+
+.navbar .navbar-nav .nav-item > .nav-link.active,
+.navbar .navbar-nav .nav-item > .nav-link[aria-current="page"] {
+    color: #f4bd36 !important;
+    font-weight: 500 !important;
+}
+.navbar .navbar-nav .nav-item > .nav-link.active::after,
+.navbar .navbar-nav .nav-item > .nav-link[aria-current="page"]::after {
     content: "";
     display: block;
     width: 25px;
@@ -107,10 +108,17 @@ a:hover {
     background: #f4bd36;
     border-radius: 10px;
 }
-
-.navbar .navbar-nav .nav-link:hover {
-    color: #f4bd36 !important;
+.navbar .dropdown-menu .dropdown-item {
+    color: #173d2d !important;
 }
+
+.navbar .dropdown-menu .dropdown-item:hover,
+.navbar .dropdown-menu .dropdown-item:focus,
+.navbar .dropdown-menu .dropdown-item.active {
+    color: #f4bd36 !important;
+    background-color: #f5f8f6 !important;
+}
+
 
 /* =========================================================
    HERO
